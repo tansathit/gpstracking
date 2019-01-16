@@ -56,6 +56,7 @@
     var formLat = '617766669';
     var formLng = '328531020';
     var formText = '445527557';
+    var formOrderNo = '508187306';
     var gsheet = '1pkXqeRyOfe5ldUaxcN8K2TYioATgtIFG9OA6-aL7RzE';
 
     //Add a basemap
@@ -103,12 +104,13 @@
         $('#projectform').submit(function(event) {
             event.preventDefault();
             var descrip = $( "input[type=radio][name=options]:checked" ).val();
+            var orderno = $('#descrip').val();
             //console.log(descrip);
-            if (descrip) {
+            if (descrip && orderno) {
               //console.log(descrip);
-              $('#formdiv').html('<iframe src="https://docs.google.com/forms/d/e/' + formId + '/formResponse?entry.' + formLat + '=' + lat + '&entry.' + formLng + '=' + lng + '&entry.'+ formText + '=' + descrip + '&submit=Submit" seamless scrolling="no" style="overflow:hidden;height:375px;border:lightgray solid thin;"></iframe>');
+              $('#formdiv').html('<iframe src="https://docs.google.com/forms/d/e/' + formId + '/formResponse?entry.' + formLat + '=' + lat + '&entry.' + formLng + '=' + lng + '&entry.'+ formText + '=' + descrip + '&entry.'+ formOrderNo + '=' + orderno + '&submit=Submit" seamless scrolling="no" style="overflow:hidden;height:375px;border:lightgray solid thin;"></iframe>');
             } else {
-              $('#formHelp').html('<span style="color:red;">Please enter a description of your point.</span>')
+              $('#formHelp').html('<span style="color:red;">กรุณาใส่ข้อมูลให้ครบถ้วน</span>')
             }
           });
       });
