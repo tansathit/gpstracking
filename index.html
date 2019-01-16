@@ -102,7 +102,7 @@
       marker.on('popupopen', function() {
         $('#projectform').submit(function(event) {
             event.preventDefault();
-            var descrip = $( "input[type=button][name=options]:checked" ).val();
+            var descrip = $( "input[type=radio][name=options]:checked" ).val();
             //console.log(descrip);
             if (descrip) {
               //console.log(descrip);
