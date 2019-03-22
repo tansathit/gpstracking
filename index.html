@@ -148,7 +148,9 @@
       //console.log(e);
       lat = e.latlng.lat;
       lng = e.latlng.lng;
-      marker.bindPopup("ไม่อยู่ในพื้นที่จัดส่ง").openPopup();
+      var popup = L.popup()
+        .setContent('<p>Hello world!<br />This is a nice popup.</p>')
+        .openOn(map);
     }
     
     function collectData(e) {
