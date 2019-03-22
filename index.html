@@ -156,6 +156,7 @@
 	.setLatLng(e.latlng)
 	.setContent("<b>พื้นที่นี้ยังไม่รองรับการจัดส่ง</b><br>(" + e.latlng.toString() + ")")
 	.openOn(map);
+	    alert("armtest after popup");
     }
     
     function collectData(e) {
@@ -229,6 +230,7 @@
 */
 	  alert("armtest4");
     map.on('locationfound', function(e) {
+	    alert("location found armtest 4");
       getData(e);
     });
     alert("armtest5");
