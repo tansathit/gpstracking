@@ -100,19 +100,6 @@
       marker = L.marker(e.latlng).addTo(map)
       .bindPopup(form, {maxWidth:400});
 
-      var circle2 = L.circle([lat, lng], {
-          color: 'red',
-          fillColor: '#f03',
-          fillOpacity: 0.5,
-          radius: 500
-      }).addTo(map);
-      
-      var polygon2 = L.polygon([
-          [lat,lng],
-          [lat-0.03,lng-0.02],
-          [lat+0.01,lng+0.039]
-      ]).addTo(map);
-      
       // ร้านวงแหวนบางขุนเทียน
       var polygon1 = L.polygon([
           [13.6271358869003,100.422876477241],
