@@ -141,13 +141,13 @@
       .bindPopup(form, {maxWidth:400});
 
       $.getJSON("geojson_wongwan.json",function(data){
-        // add GeoJSON layer to the map once the file is loaded
+      // add GeoJSON layer to the map once the file is loaded
         var datalayer = L.geoJson(data ,{
-            onEachFeature: function(feature, featureLayer) {
-              featureLayer.bindPopup(feature.properties.fill);
-            }
-          }
-        }).addTo(map);
+        onEachFeature: function(feature, featureLayer) {
+          featureLayer.bindPopup(feature.properties.fill);
+        }
+      }).addTo(map);
+      map.fitBounds(datalayer.getBounds());
       });
       
       
