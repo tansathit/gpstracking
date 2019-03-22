@@ -138,7 +138,7 @@
         circle = L.circle(e.latlng, radius).addTo(map);
       }
       marker = L.marker(e.latlng).addTo(map)
-      //.bindPopup(form, {maxWidth:400});
+      .bindPopup(form, {maxWidth:400});
 
       $.getJSON("geojson_wongwan.json",function(data){
         // add GeoJSON layer to the map once the file is loaded
