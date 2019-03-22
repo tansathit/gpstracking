@@ -99,7 +99,7 @@
     	maxZoom: 18,
     	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
-    
+
     function popUpFeature(feature, layer){
       if (feature.properties.fill == "") {
         var popupText = "พื้นที่ไม่รองรับการจัดส่ง";
@@ -144,10 +144,16 @@
     loc.start();
     var marker, circle, lat, lng; //create variables used throughout the map
    
+    var popup = L.popup();
+    
     function getData(e) {
       //console.log(e);
       lat = e.latlng.lat;
       lng = e.latlng.lng;
+      popup
+				.setLatLng(e.latlng)
+				.setContent("You clicked the map at " + e.latlng.toString())
+				.openOn(map);
     }
     
     function collectData(e) {
