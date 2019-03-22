@@ -175,6 +175,7 @@
         marker.openPopup();
         loc.stop();
       }, 100);
+	    alert("armtest2");
       marker.on('popupopen', function() {
         $('#projectform').submit(function(event) {
             event.preventDefault();
@@ -204,6 +205,7 @@
             }
           });
       });
+	    alert("armtest3");
       if (marker) {
         marker.on('popupclose', function() {
           map.removeLayer(marker);
@@ -218,10 +220,12 @@
       collectData(e);
     });
 */
+	  alert("armtest4");
     map.on('locationfound', function(e) {
       getData(e);
     });
-    
+    alert("armtest5");
+	  
   setTimeout(function() {
     if(lat) {
       return false;
