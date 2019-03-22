@@ -74,7 +74,6 @@
     	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    /*
     $.getJSON("geojson_wongwan.json",function(data){
       // add GeoJSON layer to the map once the file is loaded
       var datalayer = L.geoJson(data ,{
@@ -89,7 +88,6 @@
         }
       }).addTo(map);
     });
-    */
     
     //Add Location Options - override the plugin default popup and circle
     var locOptions = {
@@ -110,7 +108,6 @@
       //console.log(e);
       lat = e.latlng.lat;
       lng = e.latlng.lng;
-
       var form = '<div id="formdiv"><form role="form" id="projectform"><div class="form-group"><div class="form-group"><label for="description" class="requiredField">GPS Collection Form</label><div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"><div class="btn-group-vertical mr-2" data-toggle="buttons"><label class="btn btn-primary"><input type="radio" name="options" id="option2" value="Rider Accepted"> รับทราบ </label><label class="btn btn-primary"><input type="radio" name="options" id="option1" value="Order Packed"> จัดสินค้าเรียบร้อย </label></div><div class="btn-group-vertical mr-2" data-toggle="buttons"><label class="btn btn-success"><input type="radio" name="options" id="option3" value="Order Shipped"> เริ่มจัดส่ง </label> <label class="btn btn-success"><input type="radio" name="options" id="option4" value="Order Completed"> ส่งสินค้าเรียบร้อย </label></div></div><br>Order No.<textarea class="form-control" rows="1" id="descrip" placeholder="กรุณาระบุเลขที่ใบสั่งซื้อ"></textarea><em class="text-muted">กดบันทึกเพื่อลงสถานะของการทำงาน</em><div id="formHelp"></div><hr /><button type="submit" id="submit" class="btn btn-default btn-sm">บันทึก</button></form></div>';
       
       if (e.accuracy) {
@@ -119,23 +116,12 @@
       }
       marker = L.marker(e.latlng).addTo(map)
       .bindPopup(form, {maxWidth:400});
-
-      /* Working now
-      // loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
-      $.getJSON("geojson_wongwan.json",function(data){
-      // L.geoJson function is used to parse geojson file and load on to map
-      L.geoJson(data).addTo(map);
-      });
-      */
-      
-      //map.fitBounds(datalayer.getBounds()); //<--- center at lat long in datalayer 
       
       //if you try and open the popup right away the location may not be ready, eventhough it's firing after locationfound
       setTimeout(function() {
         marker.openPopup();
         loc.stop();
       }, 100);
-
       marker.on('popupopen', function() {
         $('#projectform').submit(function(event) {
             event.preventDefault();
@@ -159,8 +145,6 @@
         });
       }
     }
-
-
     map.on('locationfound', function(e) {
       collectData(e);
     });
@@ -175,17 +159,14 @@
       alert('No location found')
     }
     }, 6000);
-
     map.on('click', function(e) {
       collectData(e);
     });
-
 /*    map.on('stopfollowing', function() {
       if (marker) { 
         marker.closePopup();
       }
     });*/
-
     //Add form response points
     //Add an empty geojson layer for the google sheet points and create the popup
     var gps = new L.geoJson(null, {
@@ -193,7 +174,6 @@
         layer.bindPopup(feature.properties.Description)
       }
     });
-    
     //Grab the google sheet data using tabletop - published to the web not just shared - and use geojson.min.js to convert into proper geojson format
     var tabletop = Tabletop.init( {
       key: gsheet,
@@ -201,13 +181,11 @@
       parseNumbers: true,
       callback: function(data, tabletop) {
         var gpsData = GeoJSON.parse(data, {Point: ['Latitude', 'Longitude']});
-
         //add that data to the geojson layer created earlier
         gps.addData(gpsData);
         gps.addTo(map);
       },
     });
-    
   </script>
 </body>
 
