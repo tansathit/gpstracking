@@ -141,6 +141,9 @@
       }).addTo(map);
       */
       
+      var poly = new L.LayerGroup();
+        L.geoJson(geojson_wongwan).addTo(map);
+      
       //if you try and open the popup right away the location may not be ready, eventhough it's firing after locationfound
       setTimeout(function() {
         marker.openPopup();
