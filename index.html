@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,21 +14,19 @@
   <!--leaflet-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
-
-
+  
+  <!--leaflet new version-->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
     integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
     crossorigin=""/>  
 
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
     integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-    crossorigin=""></script> 
-
+    crossorigin=""></script>
   
   <!--Location Plugin-->
   <script src='https://cdn.jsdelivr.net/leaflet.locatecontrol/0.49.0/L.Control.Locate.min.js'></script>
   <link href='https://cdn.jsdelivr.net/leaflet.locatecontrol/0.49.0/L.Control.Locate.css' rel='stylesheet' />
-  <script src="geojson_wongwan.json" type="text/javascript"></script>
   <!--Tabletop and GeoJson-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.3/tabletop.min.js"></script>
   <script src="js/geojson.js"></script>
@@ -41,12 +38,13 @@
   <style>
     *{font-family: 'Source Sans Pro', sans-serif;}
     .map {height:70%}
-    #map {position:relative;height:700px;}
+    #map {position:relative;height:900px;}
     .leaflet-popup-content {font-size: medium;}
     .form-group{width:254px;margin-bottom:0;}
     .form-control{resize:none;}
     .text-muted{font-size:smaller;}
     hr {margin: 10px 0;}
+    .hideDiv{display:none;}  
   </style>
 </head>
 
@@ -58,22 +56,50 @@
     <div id="map"></div>
   </div>
   <div id="footer" data-tracking-area="footer" style="display:none;">
+  
+  <script type="text/javascript">
+  var hashParams = window.location.hash.substr(1).split('&'); // substr(1) to remove the `#`
+  var globalHash = {}
+  for (var i = 0; i < hashParams.length; i++) {
+    var p = hashParams[i].split('=');
+    globalHash[p[0]] = decodeURIComponent(p[1]);
+  }
+  //window.onload = function(){
+    //document.getElementById("descrip").value = globalHash.orderno;
+  //}
+  if (!globalHash.orderno) {
+    globalHash.orderno = ""
+  }
+    
+    
+  function yesnoCheck() {
+      if (document.getElementById('option4').checked) {
+          document.getElementById('ifYes').style.display = 'block';
+          if(globalHash.ridername){
+            document.getElementById("ridername").defaultValue = globalHash.ridername;
+          }
+      }
+      else document.getElementById('ifYes').style.display = 'none';
+  }
+  
+  </script>
+  
   <script>
     var map = L.map('map'); //Initialize the map
-
     var formId = '1FAIpQLScovJVgsj3iJbslamW8GPoGwCTfv4826iJExjmfZCYeRsDwsA';
     var formLat = '617766669';
     var formLng = '328531020';
     var formText = '445527557';
     var formOrderNo = '508187306';
+    var formMethod = '1994150821';
+    var formRiderName = '1640105652';
     var gsheet = '1pkXqeRyOfe5ldUaxcN8K2TYioATgtIFG9OA6-aL7RzE';
-
     //Add a basemap
     var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    	maxZoom: 19,
+    	maxZoom: 18,
     	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
-
+    
     $.getJSON("geojson_wongwan.json",function(data){
       // add GeoJSON layer to the map once the file is loaded
       var datalayer = L.geoJson(data ,{
@@ -95,20 +121,17 @@
       showPopup: false,
       follow:true,
     };
-
     //Add Location
     var loc = L.control.locate(locOptions).addTo(map);
-
     //Endable Location at page load and do things once the location is found
     loc.start();
-
     var marker, circle, lat, lng; //create variables used throughout the map
-
+   
     function collectData(e) {
       //console.log(e);
       lat = e.latlng.lat;
       lng = e.latlng.lng;
-      var form = '<div id="formdiv"><form role="form" id="projectform"><div class="form-group"><div class="form-group"><label for="description" class="requiredField">GPS Collection Form</label><div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"><div class="btn-group-vertical mr-2" data-toggle="buttons"><label class="btn btn-primary"><input type="radio" name="options" id="option2" value="Rider Accepted"> รับทราบ </label><label class="btn btn-primary"><input type="radio" name="options" id="option1" value="Order Packed"> จัดสินค้าเรียบร้อย </label></div><div class="btn-group-vertical mr-2" data-toggle="buttons"><label class="btn btn-success"><input type="radio" name="options" id="option3" value="Order Shipped"> เริ่มจัดส่ง </label> <label class="btn btn-success"><input type="radio" name="options" id="option4" value="Order Completed"> ส่งสินค้าเรียบร้อย </label></div></div><br>Order No.<textarea class="form-control" rows="1" id="descrip" placeholder="กรุณาระบุเลขที่ใบสั่งซื้อ"></textarea><em class="text-muted">กดบันทึกเพื่อลงสถานะของการทำงาน</em><div id="formHelp"></div><hr /><button type="submit" id="submit" class="btn btn-default btn-sm">บันทึก</button></form></div>';
+      var form = '<div id="formdiv"><form role="form" id="projectform"><div class="form-group"><div class="form-group"><label for="description" class="requiredField">GPS Collection Form</label><div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"><div class="btn-group-vertical mr-2" data-toggle="buttons"><label class="btn btn-primary"><input type="radio" name="options" id="option2" value="Rider Accepted" onclick="javascript:yesnoCheck();"> รับทราบ </label><label class="btn btn-primary"><input type="radio" name="options" id="option1" value="Order Packed" onclick="javascript:yesnoCheck();"> จัดสินค้าเรียบร้อย </label></div><div class="btn-group-vertical mr-2" data-toggle="buttons"><label class="btn btn-success"><input type="radio" name="options" id="option3" value="Order Shipped" onclick="javascript:yesnoCheck();"> เริ่มจัดส่ง </label> <label class="btn btn-success"><input type="radio" name="options" id="option4" value="Order Completed" onclick="javascript:yesnoCheck();"> ส่งสินค้าเรียบร้อย </label></div></div><div id="ifYes" class="hideDiv"><br><table style="width:100%"><tr><th><input type="radio" name="method" value="walk"> เดิน</th><th><input type="radio" name="method" value="motorcycle"> มอเตอร์ไซค์</th></tr></table><br>ชื่อผู้ส่ง<textarea class="form-control" rows="1" id="ridername" placeholder="กรุณาระบุชื่อผู้ส่ง"></textarea></div><br>Order No.<textarea class="form-control" rows="1" id="descrip" placeholder="กรุณาระบุเลขที่ใบสั่งซื้อ">' + globalHash.orderno +'</textarea><em class="text-muted">กดบันทึกเพื่อลงสถานะของการทำงาน</em><div id="formHelp"></div><hr /><button type="submit" id="submit" class="btn btn-default btn-sm">บันทึก</button></form></div>';
       
       if (e.accuracy) {
         var radius = (e.accuracy / 2) * 3.28084;
@@ -127,10 +150,25 @@
             event.preventDefault();
             var descrip = $( "input[type=radio][name=options]:checked" ).val();
             var orderno = $('#descrip').val();
+            var method = $( "input[type=radio][name=method]:checked" ).val();
+            var ridername = $('#ridername').val();
+            var foundError = 0;
             //console.log(descrip);
             if (descrip && orderno) {
               //console.log(descrip);
-              $('#formdiv').html('<iframe src="https://docs.google.com/forms/d/e/' + formId + '/formResponse?entry.' + formLat + '=' + lat + '&entry.' + formLng + '=' + lng + '&entry.'+ formText + '=' + descrip + '&entry.'+ formOrderNo + '=' + orderno + '&submit=Submit" seamless scrolling="no" style="overflow:hidden;height:375px;border:lightgray solid thin;"></iframe>');
+              
+              if (descrip == "Order Completed") {
+                if (method && ridername) {
+                  foundError = 0;
+                } else {
+                  foundError = 1;
+                  $('#formHelp').html('<span style="color:red;">กรุณาใส่ข้อมูลให้ครบถ้วน</span>')
+                }
+              }
+              
+              if (foundError == 0) {
+                $('#formdiv').html('<iframe src="https://docs.google.com/forms/d/e/' + formId + '/formResponse?entry.' + formLat + '=' + lat + '&entry.' + formLng + '=' + lng + '&entry.'+ formText + '=' + descrip + '&entry.'+ formOrderNo + '=' + orderno + '&entry.'+ formMethod + '=' + method + '&entry.'+ formRiderName + '=' + ridername + '&submit=Submit" seamless scrolling="no" style="overflow:hidden;height:375px;border:lightgray solid thin;"></iframe>');
+              }
             } else {
               $('#formHelp').html('<span style="color:red;">กรุณาใส่ข้อมูลให้ครบถ้วน</span>')
             }
@@ -187,6 +225,6 @@
       },
     });
   </script>
+<script>
 </body>
-
 </html>
