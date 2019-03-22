@@ -62,7 +62,7 @@
     	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
     
-    var geojsonFeature = {
+    var states = {
       "type": "FeatureCollection",
         "features": [
           {
@@ -196,6 +196,11 @@
           }
         ]
     };
+
+    L.geoJSON(states, {
+        style: function(feature) {
+        }
+    }).addTo(map);
     
     //Add Location Options - override the plugin default popup and circle
     var locOptions = {
