@@ -142,6 +142,19 @@
     loc.start();
     var marker, circle, lat, lng; //create variables used throughout the map
    
+    function getData(e) {
+      //console.log(e);
+      lat = e.latlng.lat;
+      lng = e.latlng.lng;
+
+      if (e.accuracy) {
+        var radius = (e.accuracy / 2) * 3.28084;
+        circle = L.circle(e.latlng, radius).addTo(map);
+      }
+      marker = L.marker(e.latlng).addTo(map)
+      .bindPopup("ไม่อยู่ในพื้นที่จัดส่ง");
+    }
+    
     function collectData(e) {
       //console.log(e);
       lat = e.latlng.lat;
@@ -154,18 +167,7 @@
       }
       marker = L.marker(e.latlng).addTo(map)
       .bindPopup(form, {maxWidth:400});
-/*
-      $.getJSON("geojson_wongwan.json",function(data){
-      // add GeoJSON layer to the map once the file is loaded
-        var datalayer = L.geoJson(data ,{
-        onEachFeature: function(feature, featureLayer) {
-          featureLayer.bindPopup(feature.properties.fill);
-        }
-      }).addTo(map);
-      map.fitBounds(datalayer.getBounds());
-      });
-*/      
-      
+
       //if you try and open the popup right away the location may not be ready, eventhough it's firing after locationfound
       setTimeout(function() {
         marker.openPopup();
@@ -214,7 +216,9 @@
       collectData(e);
     });
 */
-    map.on('locationfound');
+    map.on('locationfound', function(e) {
+      getData(e);
+    });
     
   setTimeout(function() {
     if(lat) {
@@ -231,7 +235,9 @@
       collectData(e);
     });
     */
-    map.on('click');
+    map.on('click', function(e) {
+      getData(e);
+    });
 /*    map.on('stopfollowing', function() {
       if (marker) { 
         marker.closePopup();
