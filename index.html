@@ -152,13 +152,15 @@
       $.getJSON("geojson_wongwan.json",function(data){
         // add GeoJSON layer to the map once the file is loaded
         var datalayer = L.geoJson(data ,{
-          style: function(feature, featureLayer) {
-            featureLayer.fillColor(feature.properties.fill),
-            featureLayer.fillOpacity(feature.properties['fill-opacity']),
-            featureLayer.color(feature.properties['stroke']),
-            featureLayer.width(feature.properties['stroke-width']),
-            featureLayer.opacity(feature.properties['opacity'])
-         }
+          style: function(feature) {
+              return {
+                  fillColor: feature.properties['fill'],
+                  fillOpacity: feature.properties['fill-opacity'],
+                  color: feature.properties['stroke'],
+                  width: feature.properties['stroke-width'],
+                  opacity: feature.properties['opacity']
+              };
+          }
         }).addTo(map);
         map.fitBounds(datalayer.getBounds());
       });
