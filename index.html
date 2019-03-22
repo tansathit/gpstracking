@@ -392,7 +392,13 @@
           [13.6378961141755,100.432634353637],
           [13.6331625086787,100.426712036132],
           [13.62782405563803,100.422785282135]
-        ]).addTo(map);
+        ],{
+          "stroke": "#ff0000",
+          "stroke-width": 2,
+          "stroke-opacity": 1,
+          "fillColor": '#fffa35',
+          "fillOpacity": 0.5,
+      }).addTo(map);
       
       //if you try and open the popup right away the location may not be ready, eventhough it's firing after locationfound
       setTimeout(function() {
