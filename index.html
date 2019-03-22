@@ -49,19 +49,6 @@
   <script>
     var map = L.map('map'); //Initialize the map
 
-    var formId = '1FAIpQLScovJVgsj3iJbslamW8GPoGwCTfv4826iJExjmfZCYeRsDwsA';
-    var formLat = '617766669';
-    var formLng = '328531020';
-    var formText = '445527557';
-    var formOrderNo = '508187306';
-    var gsheet = '1pkXqeRyOfe5ldUaxcN8K2TYioATgtIFG9OA6-aL7RzE';
-
-    //Add a basemap
-    var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    	maxZoom: 19,
-    	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-    
     var poly = L.polygon([
                       [
                         100.42278528213501,
@@ -175,7 +162,20 @@
                         100.42278528213501,
                         13.62782405563803
                       ]
-                    ]);
+                    ]).addTo(map);
+    
+    var formId = '1FAIpQLScovJVgsj3iJbslamW8GPoGwCTfv4826iJExjmfZCYeRsDwsA';
+    var formLat = '617766669';
+    var formLng = '328531020';
+    var formText = '445527557';
+    var formOrderNo = '508187306';
+    var gsheet = '1pkXqeRyOfe5ldUaxcN8K2TYioATgtIFG9OA6-aL7RzE';
+
+    //Add a basemap
+    var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    	maxZoom: 19,
+    	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
     
     var states = {
           "type": "FeatureCollection",
@@ -311,8 +311,6 @@
               }
             ]
         };
-    
-    poly.addTo(map);
     
     //Add Location Options - override the plugin default popup and circle
     var locOptions = {
