@@ -144,7 +144,7 @@
         // add GeoJSON layer to the map once the file is loaded
         var datalayer = L.geoJson(data ,{
             onEachFeature: function(feature, featureLayer) {
-              featureLayer.bindPopup(form, {maxWidth:400});
+              featureLayer.bindPopup(feature.properties.fill);
             }
           }
         }).addTo(map);
