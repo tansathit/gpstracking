@@ -109,7 +109,7 @@
     
     //set up the feature iteration
     var onEachFeature = function(feature, layer) {
-        layer.on({
+        map.on({
             click: function(e) {
 		    alert("armtest");
                     collectData(e);
@@ -149,8 +149,8 @@
     
     function getData(e) {
       //console.log(e);
-      lat = e.latlng.lat;
-      lng = e.latlng.lng;
+      //lat = e.latlng.lat;
+      //lng = e.latlng.lng;
 	   alert("armtest before popup");
       popup
 	.setLatLng(e.latlng)
