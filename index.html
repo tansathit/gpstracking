@@ -100,6 +100,8 @@
     	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
+    var inLayer = 0;
+	  
     function popUpFeature(feature, layer){
       if (feature.properties.fill == "") {
         var popupText = "พื้นที่ไม่รองรับการจัดส่ง";
@@ -145,8 +147,6 @@
     //Endable Location at page load and do things once the location is found
     loc.start();
     var marker, circle, lat, lng; //create variables used throughout the map
-	  
-    var inLayer = 0;
    
     var popup = L.popup();
     
