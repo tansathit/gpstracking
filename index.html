@@ -141,16 +141,11 @@
       }).addTo(map);
       */
       
-      var poly = new L.LayerGroup();
-      var converted = L.geoJSON(geojson_wongwan, {
-          coordsToLatLng: function (coords) {
-              //                    latitude , longitude, altitude
-              //return new L.LatLng(coords[1], coords[0], coords[2]); //Normal behavior
-              return new L.LatLng(coords[0], coords[1], coords[2]);
-          }
+      // loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
+      $.getJSON("geojson_wongwan.json",function(data){
+      // L.geoJson function is used to parse geojson file and load on to map
+      L.geoJson(data).addTo(map);
       });
-      
-      L.geoJson(converted).addTo(map);
       
       //if you try and open the popup right away the location may not be ready, eventhough it's firing after locationfound
       setTimeout(function() {
