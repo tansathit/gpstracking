@@ -101,13 +101,12 @@
     }).addTo(map);
     
     function popUpFeature(feature, layer){
-        var popupText = "Yo, I'm a <b>" + feature.properties.party + "</b> y'all!<br>";
+        var popupText = "พื้นที่ไม่รองรับการจัดส่ง";
         layer.bindPopup(popupText);
     }
     
     //set up the feature iteration
     var onEachFeature = function(feature, layer) {
-        popUpFeature(feature, layer);
         layer.on({
             click: function(e) {
                     collectData(e);
@@ -224,9 +223,11 @@
       alert('No location found')
     }
     }, 6000);
+    /*
     map.on('click', function(e) {
       collectData(e);
     });
+    */
 /*    map.on('stopfollowing', function() {
       if (marker) { 
         marker.closePopup();
