@@ -155,8 +155,8 @@
       onEachFeature: function(feature, featureLayer) {
       featureLayer.bindPopup(feature.properties.fill);
       }
-      }).addTo(newMap);
-      newMap.fitBounds(datalayer.getBounds());
+      }).addTo(map);
+      map.fitBounds(datalayer.getBounds());
       });
       
       
