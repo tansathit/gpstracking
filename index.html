@@ -303,15 +303,6 @@
         gps.addTo(map);
       },
     });
-
-    states.forEach(function(state) {
-        var polygon = L.polygon(state.geometry.coordinates, {
-            weight: 1,
-            fillOpacity: 0.7,
-            color: 'white',
-            dashArray: '3'
-        }).addTo(map);
-    });
     
   </script>
 </body>
