@@ -212,14 +212,12 @@
       if (marker) {
 	      alert("armtest3.1");
         marker.on('popupclose', function(e) {
-		/*
 		alert("armtest3.2");
           map.removeLayer(marker);
 		alert("armtest3.3");
           if (map.hasLayer(circle)) {
             map.removeLayer(circle);
           }
-	  */
         });
       }
     }
@@ -252,6 +250,7 @@
     */
 	  alert("armtest6");
     map.on('click', function(e) {
+	    alert("armtest6 after click");
       getData(e);
     });
 	  alert("armtest7");
