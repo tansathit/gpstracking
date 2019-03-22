@@ -362,7 +362,25 @@
           [lat,lng],
           [lat-0.03,lng-0.02],
           [lat+0.01,lng+0.039]
-      ]).addTo(map);     
+      ]).addTo(map);
+      
+      var polygon1 = L.polygon([
+                        [
+                          100.42278528213501,
+                          13.62782405563803
+                        ],
+                        [
+                          100.42287647724152,
+                          13.627135886900318
+                        ],
+                        [
+                          100.42362213134766,
+                          13.620817153019964
+                        ]
+        ]).addTo(map);
+      
+      alert(lat)
+      alert(lng)
       
       //if you try and open the popup right away the location may not be ready, eventhough it's firing after locationfound
       setTimeout(function() {
