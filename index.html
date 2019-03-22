@@ -101,8 +101,10 @@
     }).addTo(map);
     
     function popUpFeature(feature, layer){
+      if (feature.properties.fill == "") {
         var popupText = "พื้นที่ไม่รองรับการจัดส่ง";
         layer.bindPopup(popupText);
+      }
     }
     
     //set up the feature iteration
@@ -143,7 +145,7 @@
     var marker, circle, lat, lng; //create variables used throughout the map
    
     function getData(e) {
-      //console.log(e);
+      console.log(e);
       lat = e.latlng.lat;
       lng = e.latlng.lng;
 
