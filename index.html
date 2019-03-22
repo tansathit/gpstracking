@@ -226,12 +226,7 @@
       marker = L.marker(e.latlng).addTo(map)
       .bindPopup(form, {maxWidth:400});
 
-      var circle2 = L.circle([51.508, -0.11], {
-          color: 'red',
-          fillColor: '#f03',
-          fillOpacity: 0.5,
-          radius: 500000
-      }).addTo(mymap);
+      var circle2 = L.circle(e.latlng, radius*2).addTo(map);
       
       var poly = L.polygon([
                         [
