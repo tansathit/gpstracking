@@ -127,9 +127,7 @@
                 opacity: feature.properties['opacity']
             };
         },
-        onEachFeature: function(feature, featureLayer) {
-          featureLayer.bindPopup(feature.properties.fill);
-        }
+        onEachFeature: onEachFeature
       }).addTo(map);
     });
     
