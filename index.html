@@ -289,15 +289,6 @@
               }
             ]
         };
-
-    states.forEach(function(state) {
-        var polygon = L.polygon(state.geometry.coordinates, {
-            weight: 1,
-            fillOpacity: 0.7,
-            color: 'white',
-            dashArray: '3'
-        }).addTo(map);
-    });
     
     //Grab the google sheet data using tabletop - published to the web not just shared - and use geojson.min.js to convert into proper geojson format
     var tabletop = Tabletop.init( {
@@ -313,6 +304,15 @@
       },
     });
 
+    states.forEach(function(state) {
+        var polygon = L.polygon(state.geometry.coordinates, {
+            weight: 1,
+            fillOpacity: 0.7,
+            color: 'white',
+            dashArray: '3'
+        }).addTo(map);
+    });
+    
   </script>
 </body>
 
