@@ -100,6 +100,21 @@
     	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
     
+    function popUpFeature(feature, layer){
+        var popupText = "Yo, I'm a <b>" + feature.properties.party + "</b> y'all!<br>";
+        layer.bindPopup(popupText);
+    }
+    
+    //set up the feature iteration
+    var onEachFeature = function(feature, layer) {
+        popUpFeature(feature, layer);
+        layer.on({
+            click: function(e) {
+                    collectData(e);
+                  }
+        });
+    }
+    
     $.getJSON("geojson_wongwan.json",function(data){
       // add GeoJSON layer to the map once the file is loaded
       var datalayer = L.geoJson(data ,{
