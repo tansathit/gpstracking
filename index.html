@@ -209,11 +209,12 @@
         });
       }
     }
-    /*
+/*
     map.on('locationfound', function(e) {
       collectData(e);
     });
-    */
+*/
+    map.on('locationfound');
     
   setTimeout(function() {
     if(lat) {
@@ -230,6 +231,7 @@
       collectData(e);
     });
     */
+    map.on('click');
 /*    map.on('stopfollowing', function() {
       if (marker) { 
         marker.closePopup();
