@@ -151,6 +151,7 @@
       //console.log(e);
       lat = e.latlng.lat;
       lng = e.latlng.lng;
+	   alert("armtest before popup");
       popup
 	.setLatLng(e.latlng)
 	.setContent("<b>พื้นที่นี้ยังไม่รองรับการจัดส่ง</b><br>(" + e.latlng.toString() + ")")
@@ -206,15 +207,17 @@
           });
       });
 	    alert("armtest3");
-	/*  
+
       if (marker) {
+	      alert("armtest3.1");
         marker.on('popupclose', function() {
+		alert("armtest3.2");
           map.removeLayer(marker);
           if (map.hasLayer(circle)) {
             map.removeLayer(circle);
           }
         });
-      }*/
+      }
     }
 /*
     map.on('locationfound', function(e) {
