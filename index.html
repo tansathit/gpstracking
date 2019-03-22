@@ -130,7 +130,7 @@
             };
         },
         onEachFeature: onEachFeature
-      }).addTo(map);
+      }).addTo(map).bindPopup("I am a polygon.");
     });
     
     //Add Location Options - override the plugin default popup and circle
@@ -145,7 +145,19 @@
     loc.start();
     var marker, circle, lat, lng; //create variables used throughout the map
    
-
+    var popup = L.popup();
+    
+    function getData(e) {
+      //console.log(e);
+      //lat = e.latlng.lat;
+      //lng = e.latlng.lng;
+	   alert("armtest before popup");
+      popup
+	.setLatLng(e.latlng)
+	.setContent("<b>พื้นที่นี้ยังไม่รองรับการจัดส่ง</b><br>(" + e.latlng.toString() + ")")
+	.openOn(map);
+	    alert("armtest after popup");
+    }
     
     function collectData(e) {
       //console.log(e);
@@ -268,19 +280,7 @@
         gps.addTo(map);
       },
     });
-    var popup = L.popup();
-    
-    function getData(e) {
-      //console.log(e);
-      //lat = e.latlng.lat;
-      //lng = e.latlng.lng;
-	   alert("armtest before popup");
-      popup
-	.setLatLng(e.latlng)
-	.setContent("<b>พื้นที่นี้ยังไม่รองรับการจัดส่ง</b><br>(" + e.latlng.toString() + ")")
-	.openOn(map);
-	    alert("armtest after popup");
-    }
+
 	alert("armtest6");
     map.on('click', getData);
 	  alert("armtest7");
