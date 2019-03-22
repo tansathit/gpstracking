@@ -111,6 +111,7 @@
     var onEachFeature = function(feature, layer) {
         layer.on({
             click: function(e) {
+		    alert("armtest");
                     collectData(e);
                   }
         });
@@ -151,9 +152,9 @@
       lat = e.latlng.lat;
       lng = e.latlng.lng;
       popup
-				.setLatLng(e.latlng)
-				.setContent("You clicked the map at " + e.latlng.toString())
-				.openOn(map);
+	.setLatLng(e.latlng)
+	.setContent("You clicked the map at " + e.latlng.toString())
+	.openOn(map);
     }
     
     function collectData(e) {
