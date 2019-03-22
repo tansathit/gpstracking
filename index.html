@@ -142,7 +142,15 @@
       */
       
       var poly = new L.LayerGroup();
-        L.geoJson(geojson_wongwan).addTo(map);
+      var converted = L.geoJSON(geojson_wongwan, {
+          coordsToLatLng: function (coords) {
+              //                    latitude , longitude, altitude
+              //return new L.LatLng(coords[1], coords[0], coords[2]); //Normal behavior
+              return new L.LatLng(coords[0], coords[1], coords[2]);
+          }
+      });
+      
+      L.geoJson(converted).addTo(map);
       
       //if you try and open the popup right away the location may not be ready, eventhough it's firing after locationfound
       setTimeout(function() {
