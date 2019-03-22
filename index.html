@@ -107,13 +107,12 @@
       }
     }
     
-    var inLayer = 0;
+
     //set up the feature iteration
     var onEachFeature = function(feature, layer) {
         layer.on({
             click: function(e) {
 		    alert("armtest");
-		    inLayer = 1;
                     collectData(e);
                   }
         });
@@ -146,6 +145,8 @@
     //Endable Location at page load and do things once the location is found
     loc.start();
     var marker, circle, lat, lng; //create variables used throughout the map
+	  
+    var inLayer = 0;
    
     var popup = L.popup();
     
@@ -154,6 +155,7 @@
       //lat = e.latlng.lat;
       //lng = e.latlng.lng;
 	   alert("armtest before popup");
+	   alert(inLayer);
       if (inLayer == 0) {
 	      popup
 		.setLatLng(e.latlng)
@@ -161,20 +163,22 @@
 		.openOn(map);
 		    alert("armtest after popup");
       }
-      inLayer = 1;
+      inLayer = 0;
     }
     
     function collectData(e) {
       //console.log(e);
       lat = e.latlng.lat;
       lng = e.latlng.lng;
+      inLayer = 1;
       var form = '<div id="formdiv"><form role="form" id="projectform"><div class="form-group"><div class="form-group"><label for="description" class="requiredField">GPS Collection Form</label><div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"><div class="btn-group-vertical mr-2" data-toggle="buttons"><label class="btn btn-primary"><input type="radio" name="options" id="option2" value="Rider Accepted" onclick="javascript:yesnoCheck();"> รับทราบ </label><label class="btn btn-primary"><input type="radio" name="options" id="option1" value="Order Packed" onclick="javascript:yesnoCheck();"> จัดสินค้าเรียบร้อย </label></div><div class="btn-group-vertical mr-2" data-toggle="buttons"><label class="btn btn-success"><input type="radio" name="options" id="option3" value="Order Shipped" onclick="javascript:yesnoCheck();"> เริ่มจัดส่ง </label> <label class="btn btn-success"><input type="radio" name="options" id="option4" value="Order Completed" onclick="javascript:yesnoCheck();"> ส่งสินค้าเรียบร้อย </label></div></div><div id="ifYes" class="hideDiv"><br><table style="width:100%"><tr><th><input type="radio" name="method" value="walk"> เดิน</th><th><input type="radio" name="method" value="motorcycle"> มอเตอร์ไซค์</th></tr></table><br>ชื่อผู้ส่ง<textarea class="form-control" rows="1" id="ridername" placeholder="กรุณาระบุชื่อผู้ส่ง"></textarea></div><br>Order No.<textarea class="form-control" rows="1" id="descrip" placeholder="กรุณาระบุเลขที่ใบสั่งซื้อ">' + globalHash.orderno +'</textarea><em class="text-muted">กดบันทึกเพื่อลงสถานะของการทำงาน</em><div id="formHelp"></div><hr /><button type="submit" id="submit" class="btn btn-default btn-sm">บันทึก</button></form></div>';
 	    
       if (e.accuracy) {
         var radius = (e.accuracy / 2) * 3.28084;
         circle = L.circle(e.latlng, radius).addTo(map);
       }
-	    alet("amrtest form popup");
+	    alert("amrtest form popup");
+	    alert(inLayer);
       marker = L.marker(e.latlng).addTo(map)
       .bindPopup(form, {maxWidth:400});
 
