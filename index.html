@@ -114,7 +114,6 @@
     var onEachFeature = function(feature, layer) {
         layer.on({
             click: function(e) {
-		    alert("armtest");
                     collectData(e);
                   }
         });
@@ -154,14 +153,11 @@
       //console.log(e);
       //lat = e.latlng.lat;
       //lng = e.latlng.lng;
-	   alert("armtest before popup");
-	   alert(inLayer);
       if (inLayer == 0) {
 	      popup
 		.setLatLng(e.latlng)
 		.setContent("<b>พื้นที่นี้ยังไม่รองรับการจัดส่ง</b><br>(" + e.latlng.toString() + ")")
 		.openOn(map);
-		    alert("armtest after popup");
       }
       inLayer = 0;
     }
@@ -177,8 +173,6 @@
         var radius = (e.accuracy / 2) * 3.28084;
         circle = L.circle(e.latlng, radius).addTo(map);
       }
-	    alert("amrtest form popup");
-	    alert(inLayer);
       marker = L.marker(e.latlng).addTo(map)
       .bindPopup(form, {maxWidth:400});
 
@@ -187,7 +181,7 @@
         marker.openPopup();
         loc.stop();
       }, 100);
-	    alert("armtest2");
+
       marker.on('popupopen', function() {
         $('#projectform').submit(function(event) {
             event.preventDefault();
@@ -217,14 +211,10 @@
             }
           });
       });
-	    alert("armtest3");
 
       if (marker) {
-	      alert("armtest3.1");
         marker.on('popupclose', function(e) {
-		alert("armtest3.2");
           map.removeLayer(marker);
-		alert("armtest3.3");
           if (map.hasLayer(circle)) {
             map.removeLayer(circle);
           }
@@ -236,12 +226,10 @@
       collectData(e);
     });
 */
-	  alert("armtest4");
+
     map.on('locationfound', function(e) {
-	    alert("location found armtest 4");
       getData(e);
     });
-    alert("armtest5");
 	  
   setTimeout(function() {
     if(lat) {
@@ -259,9 +247,7 @@
     });
     */
 
-	  alert("armtest6");
     map.on('click', function(e) {
-	    alert("armtest6 after click");
       getData(e);
     });
 
