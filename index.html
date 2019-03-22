@@ -111,6 +111,9 @@
                 width: feature.properties['stroke-width'],
                 opacity: feature.properties['opacity']
             };
+        },
+        onEachFeature: function(feature, featureLayer) {
+          featureLayer.bindPopup(feature.properties.fill);
         }
       }).addTo(map);
     });
@@ -139,7 +142,7 @@
       }
       marker = L.marker(e.latlng).addTo(map)
       .bindPopup(form, {maxWidth:400});
-
+/*
       $.getJSON("geojson_wongwan.json",function(data){
       // add GeoJSON layer to the map once the file is loaded
         var datalayer = L.geoJson(data ,{
@@ -149,7 +152,7 @@
       }).addTo(map);
       map.fitBounds(datalayer.getBounds());
       });
-      
+*/      
       
       //if you try and open the popup right away the location may not be ready, eventhough it's firing after locationfound
       setTimeout(function() {
