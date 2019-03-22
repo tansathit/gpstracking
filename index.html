@@ -71,6 +71,21 @@
     	maxZoom: 19,
     	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+
+    $.getJSON("geojson_wongwan.json",function(data){
+      // add GeoJSON layer to the map once the file is loaded
+      var datalayer = L.geoJson(data ,{
+        style: function(feature) {
+            return {
+                fillColor: feature.properties['fill'],
+                fillOpacity: feature.properties['fill-opacity'],
+                color: feature.properties['stroke'],
+                width: feature.properties['stroke-width'],
+                opacity: feature.properties['opacity']
+            };
+        }
+      }).addTo(map);
+    });
     
     //Add Location Options - override the plugin default popup and circle
     var locOptions = {
@@ -149,22 +164,7 @@
       });
       */
       
-      $.getJSON("geojson_wongwan.json",function(data){
-        // add GeoJSON layer to the map once the file is loaded
-        var datalayer = L.geoJson(data ,{
-          style: function(feature) {
-              return {
-                  fillColor: feature.properties['fill'],
-                  fillOpacity: feature.properties['fill-opacity'],
-                  color: feature.properties['stroke'],
-                  width: feature.properties['stroke-width'],
-                  opacity: feature.properties['opacity']
-              };
-          }
-        }).addTo(map);
-        map.fitBounds(datalayer.getBounds());
-      });
-      
+      //map.fitBounds(datalayer.getBounds()); //<--- center at lat long in datalayer 
       
       //if you try and open the popup right away the location may not be ready, eventhough it's firing after locationfound
       setTimeout(function() {
